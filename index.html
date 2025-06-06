@@ -1,11 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculadora Simples</title>
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    
+
+<div class="container">
+    <h2>Calculadora Simples</h2>
+    <input type="number" id="num1" placeholder="Digite o primeiro número"><br>
+    <select id="operacao">
+        <option value="soma">Soma</option>
+        <option value="subtração">Subtração</option>
+    </select><br>
+    <input type="number" id="num2" placeholder="Digite o segundo número"><br>
+    <button onclick="calcular()">Calcular</button>
+
+    <div class="resultado" id="resultado"></div>
+</div>
+
+<script>
+    function calculo(num1, num2, operacao) {
+        if (operacao === 'soma') {
+            return num1 + num2;
+        } else if (operacao === 'subtração') {
+            return num1 - num2;
+        } else {
+            return null;
+        }
+    }
+
+    function calcular() {
+        const num1 = parseFloat(document.getElementById('num1').value);
+        const num2 = parseFloat(document.getElementById('num2').value);
+        const operacao = document.getElementById('operacao').value;
+
+        if (isNaN(num1) || isNaN(num2)) {
+            document.getElementById('resultado').innerText = "Por favor, insira números válidos.";
+            return;
+        }
+
+        const resultado = calculo(num1, num2, operacao);
+
+        if (resultado === null) {
+            document.getElementById('resultado').innerText = "Operação inválida.";
+        } else {
+            document.getElementById('resultado').innerText = `O resultado é: ${resultado}.`;
+        }
+    }
+</script>
+
 </body>
 </html>
